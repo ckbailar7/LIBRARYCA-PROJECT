@@ -3,6 +3,7 @@ class Media {
       this._title = title;
       this._isCheckedOut = false;
       this._ratings = [];
+
     }
   
     get title() {
@@ -38,10 +39,12 @@ class Media {
 
 
 class Book extends Media {
-    constructor(author, title, pages) {
+    constructor(author, title, pages ) {
         super(title);
         this._author = author;
         this._pages = pages;
+        this._nationalBookAwardStatus = false;
+
         
     }
 
@@ -52,6 +55,16 @@ class Book extends Media {
     get pages() {
         return this._pages;
     }
+
+    get nationalBookAwardStatus() {
+      return this._nationalBookAwardStatus;
+    }
+
+    set nationalBookAwardStatus(value) {
+      this.nationalBookAwardStatus = !this.nationalBookAwardStatus;    
+    }
+
+
 }
 
 class Movies extends Media {
@@ -59,6 +72,7 @@ class Movies extends Media {
         super(title)
         this._director = director;
         this._runtime = runtime;
+        this._movieCast = [];
     }
 
     get director() {
@@ -68,7 +82,20 @@ class Movies extends Media {
     get runtime() {
         return this._runtime;
     }
+    
+    get movieCast() {
+      return this._movieCast;
+    }
+
+    addCastMember(string) {
+      this.movieCast.push(string);
+    }
 } 
+
+
+
+
+
 
 const historyOfEverything = new Book('Bill Bryson', 'A Short History of Nearly Everything', 544);
 
@@ -81,8 +108,32 @@ historyOfEverything.addRating(5);
 historyOfEverything.addRating(5);
 
 historyOfEverything.getAverageRating();
-console.log(historyOfEverything.getAverageRating());
-        
+// console.log(historyOfEverything.getAverageRating());
 
+const speed = new Movies('Jan de Bont', 'Speed', 116);
+
+speed.toggleCheckOutStatus();
+
+console.log('is Speed checked out .... ' + speed.isCheckedOut);
+
+speed.addRating(1);
+speed.addRating(1);
+speed.addRating(5);
+
+console.log('The Average Rating for speed is ... ' + speed.getAverageRating());
+
+const windBeneathMyWings = new Book('Polly Wolly', 'Wind Beneath My Wings', 500)
+
+console.log(windBeneathMyWings);
+        
+const meetTheParents = new Movies('Robert Dinero', 'Meet The Parents', 138)
+
+console.log(meetTheParents);
+meetTheParents.addRating(5);
+meetTheParents.addRating(5);
+meetTheParents.addRating(5);
+meetTheParents.addRating(5);
+
+console.log('The average rating for Meet The Parents is ...  ' + meetTheParents.getAverageRating());
 
 
